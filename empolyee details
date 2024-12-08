@@ -1,0 +1,159 @@
+package lucky;
+public class EmpolyeeEntity {
+	private String name;
+	private int id;
+	private int salary;
+public EmpolyeeEntity(String name, int id, int salary) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "EmpolyeeEntity [name=" + name + ", id=" + id + ", salary=" + salary + "]";
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public void displayEmpolyee() {
+        System.out.println("ID: " + id + ", Name: " + name + ", Salary: " + salary);
+	}
+
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Empservice {
+    private ArrayList<EmpolyeeEntity> employees;
+	    
+public Empservice() {
+    employees = new ArrayList<>();
+}
+public void addEmployee(int id, String name,int  salary) {
+    EmpolyeeEntity employee = new EmpolyeeEntity(name, id, salary);
+    employees.add(employee);
+    System.out.println("Employee added successfully.");
+}
+public void displayAllEmployees() {
+    if (employees.isEmpty()) {
+        System.out.println("No employees available.");
+        return;
+    }
+    for (EmpolyeeEntity employee : employees) {
+        employee.displayEmpolyee();
+    }
+}
+public void updateEmployee(int id, String name,int  salary) {
+    for (EmpolyeeEntity employee : employees) {
+        if (employee.getId() == id) {
+            employee.setName(name);
+            
+            employee.setSalary(id);
+            System.out.println("Employee updated successfully.");
+            return;
+        }
+    }
+    System.out.println("Employee with ID " + id + " not found.");
+}
+public void deleteEmployee(int id) {
+    for (EmpolyeeEntity employee : employees) {
+        if (employee.getId() == id) {
+            employees.remove(employee);
+            System.out.println("Employee deleted successfully.");
+            return;
+        }
+    }
+    System.out.println("Employee with ID " + id + " not found.");
+}
+}
+package lucky;
+
+import java.util.Scanner;
+
+public class Empmain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		Empservice s=new Empservice();
+		 while (true) {
+	            System.out.println("\n--- Employee Management System ---");
+	            System.out.println("1. Add Employee");
+	            System.out.println("2. Display All Employees");
+	            System.out.println("3. Update Employee");
+	            System.out.println("4. Delete Employee");
+	            System.out.println("5. Exit");
+	            System.out.print("Enter your choice: ");
+             int choice = sc.nextInt();
+             sc.nextLine();
+             
+                         switch (choice) {
+                             case 1:
+          
+                                 System.out.print("Enter Employee ID: ");
+                                 int id = sc.nextInt();
+                                 sc.nextLine(); 
+                                 System.out.print("Enter Employee Name: ");
+                                 String name = sc.nextLine();
+               
+                                 System.out.print("Enter Employee Salary: ");
+                                 int salary = sc.nextInt();
+                                 s.addEmployee(id, name, salary);
+                                 break;
+
+                             case 2:
+          
+                                 s.displayAllEmployees();
+                                 break;
+
+                             case 3:
+                                 
+                                 System.out.print("Enter Employee ID to update: ");
+                                 int updateId = sc.nextInt();
+                                 sc.nextLine(); 
+                                 System.out.print("Enter new Employee Name: ");
+                                 String newName = sc.nextLine();
+                                 System.out.print("Enter new Employee Salary: ");
+                                 int newSalary = sc.nextInt();
+                                 s.updateEmployee(updateId, newName,  newSalary);
+                                 break;
+
+                             case 4:
+        
+                                 System.out.print("Enter Employee ID to delete: ");
+                                 int deleteId = sc.nextInt();
+                                 s.deleteEmployee(deleteId);
+                                 break;
+
+                             case 5:
+    
+                                 System.out.println("Exiting Employee Management System...");
+                                 sc.close();
+                                 System.exit(0);
+                                 break;
+
+                             default:
+                                 System.out.println("Invalid choice. Please try again.");
+                         }
+                     }
+                 }
+             
+}
+
+
+
+	
